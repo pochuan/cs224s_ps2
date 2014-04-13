@@ -78,7 +78,7 @@ for t in range(1,T):
 		cases.append((V[t-1][i]+B[t][phoneme][subphone],i))
 		if i in firstSubphone:
 			# From last state of every digit (word transition)
-			cases.append((max(V[t-1][ls] + B[t][phoneme][subphone] - 50,ls )for ls in lastSubphone))
+			cases.append((max(V[t-1][ls] + B[t][phoneme][subphone] - 50,ls)for ls in lastSubphone))
 		else:
 			# From the previous state in the same digit
 			cases.append((V[t-1][i-1] + B[t][phoneme][subphone],i-1))
@@ -89,10 +89,22 @@ for t in range(1,T):
 	# Don't need old paths
 	path = newpath
 
-(finalProb, finalState) = max((V[t][q[0]],q[0]) for q in states)
-print finalProb
-print path[finalState]
+(finalProb, finalState) = max((V[t][i],i) for i in lastSubphone)
+finalPath = [path[finalState][0]]
+for i in range(1, len(path[finalState])):
+	if path[finalState][i] != finalPath[-1]:
+		finalPath = finalPath + [path[finalState][i]]
 
+print finalPath
+
+
+output = []
+for i in finalPath:
+	if i in firstSubphone:
+		output.append(digitOfState[i])
+
+print finalProb
+print output
 
 
 
