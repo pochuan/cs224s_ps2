@@ -4,19 +4,20 @@ from collections import OrderedDict
 print "Viterbi!"
 
 # Read in files
-lexicon = {}
+Lexicon = {}
 with open('lexicon.txt') as f:
 	for line in f:
 		split = re.split(r'\s+', line)
-		lexicon[split[0]] = split[1:-2]
+		Lexicon[split[0]] = split[1:-2]
 
-phonemes = []
+Phonemes = []
 with open('phonemes.txt') as f:
 	for line in f:
-		phonemes.append(line.strip())
+		Phonemes.append(line.strip())
 
 B = {}
-with open('output.txt') as f:
+#with open('output.txt') as f:
+with open('fake.output') as f:
 	for line in f:
 		split = re.split(r'\s+', line.strip())
 		t = int(split[0])
@@ -27,22 +28,36 @@ with open('output.txt') as f:
 		B[t][split[1]][int(split[2])] = float(split[3])
 
 # Number of time frames 
-t = len(B)
+T = len(B)
 
 # Number of words in the lexicon
-N = len(lexicon)
+N = len(Lexicon)
 
 V = [{}]
 path = {}
 
 print 'Initialize Viterbi Trellis'
-for digit in lexicon.keys():
+for digit in Lexicon.keys():
 	V[0][digit] = OrderedDict()
-	for i, phoneme in enumerate(lexicon[digit]):
+	for i, phoneme in enumerate(Lexicon[digit]):
 		if i == 0:
 			V[0][digit][phoneme] = (B[0][phoneme][0], 0, 0)
 		else:
 			V[0][digit][phoneme] = (0,0,0)
 
-print V[0]['seven']['S']
+print V[0]['seven']
+
+
+print 'Run Viterbi for t > 0'
+for t in range(1, T):
+	V.append({})
+	p = []
+	for digit, phonemes in Lexicon:
+		for phone in phonemes:
+			for subphone in range(3):
+				p.append(V[t-1][digit][phone][subphone]+B[t][phone][subphone])
+
+
+
+
 
