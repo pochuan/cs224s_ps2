@@ -45,29 +45,37 @@ for digit, phonemeList in Lexicon.iteritems():
 			states.append((i, digit, phoneme, subphone))
 			digitOfState[i] = digit
 			i = i + 1 
+lastSubphone = firstSubphone[1:] - 1
+print firstSubphone
+print lastSubphone
 
-V = [{}]
-path = {}
-print 'Initialize Viterbi Trellis'
-for q in states:
-	i = q[0]
-	digit = q[1]
-	phoneme = q[2]
-	subphone = q[3]
-	if i in firstSubphone:
-		V[0][i] = B[0][phoneme][subphone]
-	else:
-		V[0][i] = 0
+# V = [{}]
+# path = {}
+# print 'Initialize Viterbi Trellis'
+# for q in states:
+# 	i = q[0]
+# 	digit = q[1]
+# 	phoneme = q[2]
+# 	subphone = q[3]
+# 	if i in firstSubphone:
+# 		V[0][i] = B[0][phoneme][subphone]
+# 	else:
+# 		V[0][i] = 0
 
-print 'Run Viterbi for t > 0'
-for t in range(T):
-	V.append({})
-	for q in states:
-		i = q[0]
-		digit = q[1]
-		phoneme = q[2]
-		subphone = q[3]
-		
+# print 'Run Viterbi for t > 0'
+# for t in range(T):
+# 	V.append({})
+# 	for q in states:
+# 		i = q[0]
+# 		digit = q[1]
+# 		phoneme = q[2]
+# 		subphone = q[3]
+# 		cases = []
+# 		# Stay in the same state
+# 		cases.append(V[t-1][i]+B[t][phone][subphone])
+# 		if i in firstSubphone:
+# 			# From last state of every digit
+# 			cases.append(max(V[t-1][ls]+B[t][phone][subphone] for ls in firstSubphone))
 
 # V = [{}]
 # path = {}
