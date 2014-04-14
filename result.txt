@@ -1,0 +1,15 @@
+silence
+three
+one
+four
+silence
+eight
+six
+five
+four
+three
+six
+seven
+silence
+
+log probability: -21460.58

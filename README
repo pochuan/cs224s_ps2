@@ -1,0 +1,13 @@
+CS 224S Homework 2
+Viterbi in ASR
+Paul Chen (pochuan@stanford.edu)
+
+To run Viterbi: python viterbi.py 
+
+Make sure that the input filenames in viterbi.py are correct:
+lexiconFileName = 'lexicon.txt'
+phonemesFileName = 'phonemes.txt'
+emissionsFileName = 'output.txt'
+resultsFileName = 'result.txt'
+
+
